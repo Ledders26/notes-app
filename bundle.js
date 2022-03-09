@@ -51,6 +51,9 @@
             this.mainContainerEl.append(noteEl);
           });
         }
+        removeOldNotes() {
+          con;
+        }
       };
       module.exports = NotesView2;
     }

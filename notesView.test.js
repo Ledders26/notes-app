@@ -31,4 +31,18 @@ const NotesView = require('./notesView');
 
    });
 
+
+  it('clears the old user inputs', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+    const model = new NotesModel();
+    const view = new NotesView(model); 
+    document.querySelector('#note-input').value ='Test Note 1';
+    document.querySelector('#show-note-button').click();
+    document.querySelector('#note-input').value ='Test Note 2';
+    document.querySelector('#show-note-button').click();
+    expect(document.querySelectorAll('div.note').length).toEqual(2);
+    expect(document.querySelectorAll('div.note')[1].innerText).toEqual('Test Note 2');
+
+  });
+
  });

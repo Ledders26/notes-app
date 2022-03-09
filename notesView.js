@@ -27,7 +27,7 @@ class NotesView {
       }
 
       removeOldNotes() {
-        const oldNotes = document.querySelectorAll('.notes');
+        const oldNotes = document.querySelectorAll('.note');
         oldNotes.forEach(note =>{
           note.remove();
         });

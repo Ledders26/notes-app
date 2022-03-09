@@ -43,6 +43,7 @@
           this.displayNotes();
         }
         displayNotes() {
+          this.removeOldNotes();
           const notes = this.model.getNotes();
           notes.forEach((note) => {
             const noteEl = document.createElement("div");
@@ -52,7 +53,10 @@
           });
         }
         removeOldNotes() {
-          con;
+          const oldNotes = document.querySelectorAll(".note");
+          oldNotes.forEach((note) => {
+            note.remove();
+          });
         }
       };
       module.exports = NotesView2;

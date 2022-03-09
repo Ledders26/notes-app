@@ -11,8 +11,9 @@ class NotesView {
 
      addNewNote() {
       const noteEl = document.querySelector('#note-input').value;
-      this.model.addNote(noteEl)
+      this.model.addNote(noteEl);
       this.displayNotes();
+      document.querySelector('#note-input').value = '';
       };
     
       displayNotes() {

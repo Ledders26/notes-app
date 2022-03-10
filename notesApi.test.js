@@ -1,14 +1,16 @@
 const NotesApi = require('./notesApi');
 
-require('jest-fetch-mock').enableFetchMocks()
+require('jest-fetch-mock').enableMocks()
 
-describe('NotesApi class', () => {
-  it('can load notes using fetch', async () => {
+describe('Server notes', () => {
+  it('calls fetch and fins message from server', async () => {
     const api = new NotesApi();
     fetch.mockResponseOnce(JSON.stringify({
-      note: 'Ben & Shirley hate JSON'
+      note: 'Test Note',
     }));
 
-    api.loadNotes
+    api.loadNotes((notesInfo) => {
+      expect(notesInfo.note).toBe('Test Note');
+    });
   });
 });

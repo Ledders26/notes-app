@@ -10,6 +10,7 @@ class NotesModel{
   addNote(note){
     this.notes.push(note);
   }
+  
   clearHistory(){
     this.notes = [];
   }

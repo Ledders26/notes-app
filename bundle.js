@@ -42,13 +42,14 @@
           });
         }
         addNewNote() {
-          const noteEl = document.querySelector("#note-input").value;
-          this.model.addNote(noteEl);
+          const noteEl = document.querySelector("#note-input");
+          const noteElValue = noteEl.value;
+          this.model.addNote(noteElValue);
+          noteEl.value = "";
           this.displayNotes();
-          document.querySelector("#note-input").value = "";
         }
         displayNotes() {
-          this.removeOldNotes();
+          this.deleteOldNote();
           const notes = this.model.getNotes();
           notes.forEach((note) => {
             const noteEl = document.createElement("div");
@@ -57,9 +58,10 @@
             this.mainContainerEl.append(noteEl);
           });
         }
-        removeOldNotes() {
-          const oldNotes = document.querySelectorAll(".note");
-          oldNotes.forEach((note) => {
+        deleteOldNote() {
+          let notes = document.querySelectorAll(".note");
+          console.log(notes);
+          notes.forEach((note) => {
             note.remove();
           });
         }

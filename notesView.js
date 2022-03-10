@@ -7,18 +7,18 @@ class NotesView {
       this.buttonEl.addEventListener('click', () => {
         this.addNewNote();
        });
-      //console.log(this.mainContainerEl);
      };
 
      addNewNote() {
-      const noteEl = document.querySelector('#note-input').value;
-      this.model.addNote(noteEl);
+      const noteEl = document.querySelector('#note-input');
+      const noteElValue = noteEl.value;
+      this.model.addNote(noteElValue);
+      noteEl.value = '';
       this.displayNotes();
-      document.querySelector('#note-input').value = '';
       };
     
       displayNotes() {
-        this.removeOldNotes();
+        this.deleteOldNote();
         const notes = this.model.getNotes()
         notes.forEach(note => { 
           const noteEl = document.createElement('div')
@@ -28,21 +28,13 @@ class NotesView {
         });
       }
 
-      removeOldNotes() {
-        const oldNotes = document.querySelectorAll('.note');
-        oldNotes.forEach(note =>{
+      deleteOldNote() {
+        let notes = document.querySelectorAll('.note');
+        console.log(notes);
+        notes.forEach(note => {
           note.remove();
         });
       };
-
-    //   displayMessage() {
-    //     let inputEl = document.querySelector('#message-input') // finds the message input
-    //     letold div = document.createElement('div'); // creates a div
-    //     div.setAttribute('id', 'message') // calls the div - message
-    //     div.innerText = inputEl.value; // sents the content of the div, to the value of the input
-    //     this.mainContainerEl.append(div); // adds the div with the input value to the webpage
-    // }
     };
-
 
  module.exports = NotesView;

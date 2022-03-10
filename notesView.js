@@ -1,6 +1,7 @@
 class NotesView {
-    constructor(model) {
+    constructor(model, api) {
       this.model = model;
+      this.api = api;
       this.mainContainerEl = document.querySelector('#main-container');
       this.buttonEl = document.querySelector('#show-note-button');
       this.buttonEl.addEventListener('click', () => {
@@ -34,32 +35,6 @@ class NotesView {
           note.remove();
         });
       };
-
-
-
-
-
-
-
-
-
-
-
-      // removeOldNotes() {
-      //   const oldNotes = document.querySelectorAll('.note');
-      //   oldNotes.forEach(note =>{
-      //     note.remove();
-      //   });
-      // };
-
-    //   displayMessage() {
-    //     let inputEl = document.querySelector('#message-input') // finds the message input
-    //     letold div = document.createElement('div'); // creates a div
-    //     div.setAttribute('id', 'message') // calls the div - message
-    //     div.innerText = inputEl.value; // sents the content of the div, to the value of the input
-    //     this.mainContainerEl.append(div); // adds the div with the input value to the webpage
-    // }
     };
-
 
  module.exports = NotesView;

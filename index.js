@@ -5,18 +5,16 @@
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
 const NotesModel = require('./notesModel');
 const NotesView = require('./notesView');
+const NotesAPI = require('./notesAPI')
 
+const api = new NotesAPI();
 const model = new NotesModel();
-const view = new NotesView(model);
-
-//  model.getNotes();
- //model.addNote("This is an example note ");
-
- view.displayNotes();
+const view = new NotesView(model, api);
 
 
-// let model = new NotesModel();
-// model.addNote('Buy Milk');
-// console.log('The notes app is running');
-// console.log(`${model.getNotes()}`);
-// console.log(model.getNotes());
+ api.loadNotes((notes) => {
+  
+    model.setNotes(notes)
+    view.displayNotes();
+    console.log(notes)
+  });

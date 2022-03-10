@@ -29,8 +29,9 @@
   var require_notesView = __commonJS({
     "notesView.js"(exports, module) {
       var NotesView2 = class {
-        constructor(model2) {
+        constructor(model2, api2) {
           this.model = model2;
+          this.api = api2;
           this.mainContainerEl = document.querySelector("#main-container");
           this.buttonEl = document.querySelector("#show-note-button");
           this.buttonEl.addEventListener("click", () => {
@@ -66,10 +67,30 @@
     }
   });
 
+  // notesAPI.js
+  var require_notesAPI = __commonJS({
+    "notesAPI.js"(exports, module) {
+      var NotesAPI2 = class {
+        loadNotes(notes, callback) {
+          fetch("https://localhost:3000/notes").then((response) => response.json()).then((data) => {
+            callback(data);
+          });
+        }
+      };
+      module.exports = NotesAPI2;
+    }
+  });
+
   // index.js
   var NotesModel = require_notesModel();
   var NotesView = require_notesView();
+  var NotesAPI = require_notesAPI();
+  var api = new NotesAPI();
   var model = new NotesModel();
-  var view = new NotesView(model);
-  view.displayNotes();
+  var view = new NotesView(model, api);
+  api.loadNotes((notes) => {
+    model.setNotes(notes);
+    view.displayNotes();
+    console.log(notes);
+  });
 })();

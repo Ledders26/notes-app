@@ -1,10 +1,10 @@
 class NotesModel{
   constructor(){
-    this.notes = []; 
+    this.notes = [];
   }
 
   getNotes(){
-   return this.notes;
+    return this.notes;
  }  
 
   addNote(note){
@@ -12,6 +12,10 @@ class NotesModel{
   }
   clearHistory(){
     this.notes = [];
+  }
+
+  setNotes(notes){
+    this.addNote(notes);
   }
 };
 

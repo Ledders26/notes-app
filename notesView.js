@@ -1,6 +1,7 @@
 class NotesView {
-    constructor(model) {
+    constructor(model, api) {
       this.model = model;
+      this.api = api;
       this.mainContainerEl = document.querySelector('#main-container');
       this.buttonEl = document.querySelector('#show-note-button');
       this.buttonEl.addEventListener('click', () => {

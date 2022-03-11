@@ -5,15 +5,17 @@ class NotesView {
       this.mainContainerEl = document.querySelector('#main-container');
       this.buttonEl = document.querySelector('#show-note-button');
       this.buttonEl.addEventListener('click', () => {
-        this.addNewNote();
+        const noteEl = document.querySelector('#note-input');
+        const noteElValue = noteEl.value;
+        this.api.createNote(noteElValue, notes => {
+          this.addNewNote(noteElValue);
+        })
        });
      };
 
-     addNewNote() {
-      const noteEl = document.querySelector('#note-input');
-      const noteElValue = noteEl.value;
-      this.model.addNote(noteElValue);
-      noteEl.value = '';
+     addNewNote(note) {
+      this.model.addNote(note);
+      //note.value = '';
       this.displayNotes();
       };
     

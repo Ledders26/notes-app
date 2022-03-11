@@ -38,14 +38,15 @@
           this.mainContainerEl = document.querySelector("#main-container");
           this.buttonEl = document.querySelector("#show-note-button");
           this.buttonEl.addEventListener("click", () => {
-            this.addNewNote();
+            const noteEl = document.querySelector("#note-input");
+            const noteElValue = noteEl.value;
+            this.api.createNote(noteElValue, (notes) => {
+              this.addNewNote(noteElValue);
+            });
           });
         }
-        addNewNote() {
-          const noteEl = document.querySelector("#note-input");
-          const noteElValue = noteEl.value;
-          this.model.addNote(noteElValue);
-          noteEl.value = "";
+        addNewNote(note) {
+          this.model.addNote(note);
           this.displayNotes();
         }
         displayNotes() {
@@ -76,6 +77,17 @@
       var NotesApi2 = class {
         loadNotes(callback) {
           fetch("http://localhost:3000/notes").then((response) => response.json()).then((data) => {
+            callback(data);
+          });
+        }
+        createNote(note, callback) {
+          fetch("http://localhost:3000/notes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ content: note })
+          }).then((response) => response.json()).then((data) => {
             callback(data);
           });
         }
